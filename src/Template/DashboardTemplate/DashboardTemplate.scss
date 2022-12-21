@@ -1,0 +1,88 @@
+@import "../../style/Helper/mixin";
+
+#dashboard-template {
+    .dashboard-template-sider {
+        width: 321px !important;
+        max-width: 321px !important;
+        min-width: 321px !important;
+        .ant-layout-sider-children {
+            background-color: #f9f6f4;
+            .ant-menu {
+                background-color: #f9f6f4;
+                color: #7e7d88;
+                .ant-menu-item {
+                    padding: 0 !important;
+                    width: 252px;
+                    margin-left: 33px;
+                    .ant-menu-title-content {
+                        a {
+                            display: inline-block;
+                            width: 100%;
+                            padding-left: 24px;
+                            &:hover {
+                                text-decoration: none;
+                            }
+                        }
+                    }
+                }
+                .ant-menu-item-selected {
+                    background-color: transparent;
+                }
+                .ant-menu-item-only-child {
+                    &:hover {
+                        background-color: transparent;
+                    }
+                    .ant-menu-item {
+                        margin: 0;
+                        padding: 0 !important;
+                        background-color: white !important;
+                        .ant-menu-title-content {
+                            a {
+                                display: inline-block;
+                                width: 100%;
+                                padding-left: 24px;
+                                border-bottom-right-radius: 12px;
+                            }
+                        }
+                        .ant-menu-submenu-arrow {
+                            display: none;
+                        }
+                    }
+                }
+                .ant-menu-item-group {
+                    padding: 0 !important;
+                    width: 252px;
+                    margin-left: 33px;
+                    .ant-menu-item-group-title {
+                        padding: 0;
+                        height: 40px;
+                        a {
+                            padding-left: 24px;
+                            width: 252px;
+                            height: 100%;
+                            display: block;
+                            display: flex;
+                            align-items: center;
+                            border-radius: 12px;
+                            &:hover{ 
+                                text-decoration: none;
+                            }
+                        }
+                    }
+                    .ant-menu-item-group-list {
+                        margin-left: 23px;
+                    }
+                }
+            }
+            .dashboard-template-logo {
+                margin-bottom: 59px;
+                margin-top: 17px;
+                margin-left: 33px;
+                img {
+                    width: 133px;
+                    height: 58px;
+                }
+            }
+        }
+    }
+}
