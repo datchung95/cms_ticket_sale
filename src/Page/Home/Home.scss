@@ -1,0 +1,131 @@
+@import "../../Style//Helper/mixin";
+
+#home {
+    .home-content {
+        .home-chart-title {
+            @include styleText(#1e0d03, 18px, 600, 28px);
+            margin-bottom: 27px;
+        }
+        .home-chart {
+            margin-top: 16px;
+        }
+        .home-revenue {
+            margin-top: 40px;
+            margin-bottom: 83px;
+            .home-weekly-revenue {
+                margin-bottom: 0;
+                @include styleText(#1e0d03, 14px, 500, 22px);
+            }
+            .home-num-revenue {
+                margin-bottom: 0;
+                @include styleText(#1e0d03, 14px, 500, 22px);
+                span {
+                    @include styleText(#1e0d03, 24px, 700, 30px);
+                }
+            }
+        }
+        .home-pie {
+            display: flex;
+            justify-content: space-around;
+            .pie-family {
+                position: relative;
+                width: 246px;
+                height: 246px;
+                display: inline-block;
+                margin-top: 25px;
+                .pie-family-value1 {
+                    padding: 12px;
+                    border: 1px solid transparent;
+                    background-color: white;
+                    box-shadow: 0px 0px 50px rgba(50, 50, 71, 0.25);
+                    border-radius: 12px;
+                    @include styleText(#1e0d03, 14px, 400, 22px);
+                    width: 63px;
+                    height: 46px;
+                    position: absolute;
+                    top: 12%;
+                    left: 76%;
+                }
+                .pie-family-value2 {
+                    padding: 12px;
+                    border: 1px solid transparent;
+                    background-color: white;
+                    box-shadow: 0px 0px 50px rgba(50, 50, 71, 0.25);
+                    border-radius: 12px;
+                    @include styleText(#1e0d03, 14px, 400, 22px);
+                    width: 63px;
+                    height: 46px;
+                    position: absolute;
+                    top: 43%;
+                    left: -8%;
+                }
+            }
+            .pie-event {
+                position: relative;
+                width: 246px;
+                height: 246px;
+                display: inline-block;
+                margin-top: 25px;
+                .pie-event-value1 {
+                    padding: 12px;
+                    border: 1px solid transparent;
+                    background-color: white;
+                    box-shadow: 0px 0px 50px rgba(50, 50, 71, 0.25);
+                    border-radius: 12px;
+                    @include styleText(#1e0d03, 14px, 400, 22px);
+                    width: 63px;
+                    height: 46px;
+                    position: absolute;
+                    top: 43%;
+                    left: 84%;
+                }
+                .pie-event-value2 {
+                    padding: 12px;
+                    border: 1px solid transparent;
+                    background-color: white;
+                    box-shadow: 0px 0px 50px rgba(50, 50, 71, 0.25);
+                    border-radius: 12px;
+                    @include styleText(#1e0d03, 14px, 400, 22px);
+                    width: 63px;
+                    height: 46px;
+                    position: absolute;
+                    top: 43%;
+                    left: -8%;
+                }
+            }
+            .home-pie-note {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                div {
+                    .home-pie-color {
+                        width: 44px;
+                        height: 20px;
+                        margin-right: 8px;
+                    }
+                    .home-pie-text {
+                        @include styleText(#1e0d03, 14px, 400, 22px);
+                    }
+                }
+                .home-pie-note-top {
+                    margin-bottom: 60px;
+                }
+                .home-pie-used {
+                    .home-pie-color {
+                        background: #4f75ff;
+                        border-radius: 4px;
+                    }
+                }
+                .home-pie-not-used {
+                    .home-pie-color {
+                        background: #FF8A48;
+                        border-radius: 4px;
+                    }
+                }
+            }
+            .g2-html-annotation {
+                display: none !important;
+            }
+        }
+    }
+}

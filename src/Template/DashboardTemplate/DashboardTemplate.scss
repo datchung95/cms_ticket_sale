@@ -83,6 +83,23 @@
                     height: 58px;
                 }
             }
+            .dashboard-template-bottom {
+                margin-bottom: 31px;
+                .dashboard-template-copyright {
+                    @include styleText(#1E0D03, 14px, 400, 22px);
+                }
+            }
+        }
+    }
+    .site-layout {
+        .dashboard-template-content {
+            margin-top: 17px;
+            .dashboard-template-img {
+                margin-right: 8px;
+                img {
+                    margin-right: 24px;
+                }
+            }
         }
     }
 }
