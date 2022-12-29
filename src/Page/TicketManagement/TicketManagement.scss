@@ -1,0 +1,18 @@
+@import "../../Style/Helper/mixin";
+@import "../../Style/Component/button";
+
+#ticket-management {
+    .ticket-management-top {
+        .ticket-management-form {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 32px;
+            .button-filter {
+                margin-right: 10px;
+                img {
+                    margin-right: 12px;
+                }
+            }
+        }
+    }
+}

@@ -1,1 +1,29 @@
 @import '../Helper/mixin';
+
+.button-ouline-orange {
+    @include styleButton(#FF993C, transparent, 18px, 700, 26px, 11px, 18px, 6px, 1px solid #FF993C);
+    &:focus {
+        outline: none;
+    }
+}
+
+.button-outline-red {
+    @include styleButton(#FD5959, #F8EBE8, 12px, 500, 15px, 8px, 18px !important, 4px, 1px solid #FD5959 !important);
+    &:focus {
+        outline: none;
+    }
+}
+
+.button-outline-green {
+    @include styleButton(#03AC00, #EAF1F8, 12px, 500, 15px, 8px, 18px !important, 4px, 1px solid #919DBA !important);
+    &:focus {
+        outline: none;
+    }
+}
+
+.button-outline-gray {
+    @include styleButton(#919DBA, #EAF1F8, 12px, 500, 15px, 8px, 18px !important, 4px, 1px solid #919DBA !important);
+    &:focus {
+        outline: none;
+    }
+}

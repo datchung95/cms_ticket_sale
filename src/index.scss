@@ -5,7 +5,7 @@ html {
   margin: 0;
   padding: 0;
   scroll-behavior: smooth;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Montserrat', sans-serif !important;
 }
 
 * {
@@ -51,5 +51,38 @@ a {
   .ant-input  {
     background-color: #EDEDED;
     @include styleText(#1E0D03, 16px !important, 400, 20px);
+  }
+}
+
+//custom table antd
+.table-row-light {
+  background-color: white;
+}
+
+.table-row-gray {
+  background-color: #F7F8FB;
+}
+
+.ant-table-wrapper {
+  .ant-table {
+    .ant-table-content {
+      font-family: 'Montserrat', sans-serif !important;
+      .ant-table-thead {
+        .ant-table-cell {
+          background-color: #F1F4F8;
+          &::before {
+            opacity: 0;
+          }
+        }
+      }
+    }
+  }
+  .ant-pagination {
+    justify-content: center;
+    margin-top: 52px !important;
+    .ant-pagination-item-active {
+      border-color: #FF993C;
+      color: #FF993C;
+    }
   }
 }

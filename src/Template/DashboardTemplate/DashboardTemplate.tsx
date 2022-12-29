@@ -70,7 +70,7 @@ export default function DashboardTemplate() {
                 <Content>
                     <div className='d-flex justify-content-between dashboard-template-content'>
                         <form>
-                            {location.pathname === "/setting" ? "" : <Input className='input-search' style={{ height: "48px", width: "470px" }} suffix={<SearchOutlined />} placeholder="Search" />}
+                            {location.pathname === "/setting" ? "" : <Input className='input-search' style={{ height: "48px", width: "446px" }} suffix={<SearchOutlined />} placeholder="Search" />}
                         </form>
                         <div className='dashboard-template-img'>
                             <img style={{ width: "24px", height: "24px" }} src={require("../../Assets/TemplateIcon/fi_mail.png")} alt="mail" />
