@@ -5,6 +5,15 @@ import App from './App';
 import 'antd/dist/reset.css';
 import reportWebVitals from './reportWebVitals';
 
+//import css 
+import "./Style/Component/InputSearchAntd.scss"
+import "./Style/Component/RadioAntd.scss"
+import "./Style/Component/TableAntd.scss"
+import "./Style/Component/CheckboxAntd.scss"
+import './Style/Component/InputAntd.scss'
+import './Style/Component/SelectAntd.scss'
+import "./Style/Component/TimepickerAntd.scss"
+
 import {Provider} from "react-redux"
 import { store } from './Redux/configStore';
 

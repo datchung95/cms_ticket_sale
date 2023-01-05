@@ -2,9 +2,9 @@
 
 #dashboard-template {
     .dashboard-template-sider {
-        width: 321px !important;
-        max-width: 321px !important;
-        min-width: 321px !important;
+        width: 280px !important;
+        max-width: 280px !important;
+        min-width: 280px !important;
         .ant-layout-sider-children {
             background-color: #f9f6f4;
             .ant-menu {
@@ -12,7 +12,7 @@
                 color: #7e7d88;
                 .ant-menu-item {
                     padding: 0 !important;
-                    width: 252px;
+                    width: 212px;
                     margin-left: 33px;
                     .ant-menu-title-content {
                         a {
@@ -51,14 +51,14 @@
                 }
                 .ant-menu-item-group {
                     padding: 0 !important;
-                    width: 252px;
+                    width: 212px;
                     margin-left: 33px;
                     .ant-menu-item-group-title {
                         padding: 0;
                         height: 40px;
                         a {
                             padding-left: 24px;
-                            width: 252px;
+                            width: 212px;
                             height: 100%;
                             display: block;
                             display: flex;

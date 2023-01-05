@@ -1,0 +1,20 @@
+.ant-radio-wrapper {
+    font-family: "Montserrat", sans-serif !important;
+    .ant-radio {
+        width: 24px;
+        height: 24px;
+        .ant-radio-input {
+            width: 24px;
+            height: 24px;
+            opacity: 1;
+        }
+        .ant-radio-inner {
+            width: 24px;
+            height: 24px;
+            background-color: #27aef9;
+            &::after {
+                opacity: 0;
+            }
+        }
+    }
+}

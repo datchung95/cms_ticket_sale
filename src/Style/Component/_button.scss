@@ -7,6 +7,13 @@
     }
 }
 
+.button-orange {
+    @include styleButton(white, #FF993C, 18px, 700, 26px, 11px, 18px, 6px, 1px solid transparent);
+    &:focus {
+        outline: none;
+    }
+}
+
 .button-outline-red {
     @include styleButton(#FD5959, #F8EBE8, 12px, 500, 15px, 8px, 18px !important, 4px, 1px solid #FD5959 !important);
     &:focus {
@@ -25,5 +32,32 @@
     @include styleButton(#919DBA, #EAF1F8, 12px, 500, 15px, 8px, 18px !important, 4px, 1px solid #919DBA !important);
     &:focus {
         outline: none;
+    }
+}
+
+.button-package {
+    @include styleText(#919DBA, 18px, 500, 26px);
+    margin-bottom: 30px;
+    margin-right: 56px;
+    cursor: pointer;
+}
+
+.button-package-active {
+    @include styleText(#FF993C, 18px, 700, 26px);
+    margin-bottom: 30px;
+    margin-right: 56px;
+    cursor: pointer;
+    text-align: center;
+    position: relative;
+    width: 128px;
+    &::after {
+        content: '';
+        border: 2px solid #FF993C;
+        background-color: #FF993C;
+        position: absolute;
+        top: 30px;
+        left: 0;
+        width: 128px;
+        border-radius: 7px;
     }
 }

@@ -1,0 +1,38 @@
+@import "../../../Style/Helper/mixin";
+
+.ticket-management-modal {
+    .ant-modal-content {
+        padding-top: 24px;
+        padding-bottom: 32px;
+        padding-left: 17px;
+        padding-right: 17px;
+        .ant-modal-header {
+            margin-bottom: 27px;
+            text-align: center;
+            .ant-modal-title {
+                @include styleText(#1E0D03, 24px, 700, 30px);
+            }
+        }
+        .ant-modal-body {
+            .modal-content-left {
+                @include styleText(#1E0D03, 16px, 600, 26px);
+            }
+            .modal-content-right {
+                @include styleText(#1E0D03, 16px, 500, 20px);
+            }
+        }
+        .ant-modal-footer {
+            text-align: center;
+            margin-top: 32px;
+            .button-cancel {
+                padding-left: 61px;
+                padding-right: 61px;
+                margin-right: 24px;
+            }
+            .button-save {
+                padding-left: 62px;
+                padding-right: 62px;
+            }
+        }
+    }
+}

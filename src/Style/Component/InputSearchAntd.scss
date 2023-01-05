@@ -1,0 +1,13 @@
+@import "../Helper/mixin";
+
+.input-search {
+    background-color: #EDEDED;
+    border-radius: 12px;
+    &:hover {
+      border-color: #d9d9d9;
+    }
+    .ant-input  {
+      background-color: #EDEDED;
+      @include styleText(#1E0D03, 16px !important, 400, 20px);
+    }
+  }

@@ -1,0 +1,7 @@
+@import "../Helper/mixin";
+
+.ant-input {
+    height: 40px;
+    @include styleText(#1E0D03, 16px, 500, 20px);
+    border: 1px solid #A5A8B1;
+}

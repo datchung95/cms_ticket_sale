@@ -1,0 +1,93 @@
+@import "../../../Style/Helper/mixin";
+
+#add-ticket-package {
+    .add-ticket-package-top {
+        .add-ticket-package-title {
+            @include styleText(#1E0D03, 24px, 700, 30px);
+            margin-bottom: 27px;
+            text-align: center;
+        }
+    }
+
+    form {
+        .add-ticket-package-name {
+            margin-bottom: 25px;
+        }
+        .add-ticket-package-date {
+            margin-bottom: 24px;
+            .add-ticket-package-date-start {
+                .add-ticket-package-date-start-time {
+                    margin-left: 9px;
+                }
+            }
+            .add-ticket-package-date-end {
+                .add-ticket-package-date-end-time {
+                    margin-left: 9px;
+                }
+            }
+        }
+        .add-ticket-package-price {
+            margin-bottom: 24px;
+            .add-ticket-package-price-top {
+                margin-bottom: 22px;
+                .ant-checkbox-wrapper {
+                    span {
+                        @include styleText(#1E0D03, 16px, 500, 20px);
+                    }
+                }
+                .add-ticket-package-price-top-input {
+                    margin-right: 8px;
+                }
+            }
+            .add-ticket-package-price-bottom {
+                .ant-checkbox-wrapper {
+                    span {
+                        @include styleText(#1E0D03, 16px, 500, 20px);
+                    }
+                }
+                .add-ticket-package-price-bottom-input {
+                    margin-right: 8px;
+                }
+                .add-ticket-package-price-bottom-input-ticket {
+                    margin-right: 8px;
+                }
+            }
+        }
+        .add-ticket-package-price-status {
+            margin-bottom: 11px;
+        }
+        .add-ticket-package-note {
+            display: flex;
+            align-items: center;
+            .add-ticket-package-note-star {
+                @include styleText(#FD5959, 16px, 600, 26px);
+                margin-right: 4px;
+            }
+            .add-ticket-package-note-info {
+                @include styleText(#1E0D03, 12px, 400, 15px);
+                font-style: italic;
+                opacity: 0.4;
+            }
+        }
+        .add-ticket-package-button {
+            text-align: center;
+            .add-ticket-package-button-cancel {
+                width: 160px;
+                margin-right: 24px;
+            }
+            .add-ticket-package-button-save {
+                width: 160px;
+            }
+        }
+
+
+
+        .add-ticket-package-text {
+            @include styleText(#1E0D03, 16px, 600, 26px);
+            margin-bottom: 5px;
+            span {
+                @include styleText(#FD5959, 16px, 600, 26px);
+            }
+        }
+    }
+}

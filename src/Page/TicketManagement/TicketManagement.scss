@@ -7,10 +7,85 @@
             display: flex;
             justify-content: space-between;
             margin-bottom: 32px;
-            .button-filter {
-                margin-right: 10px;
-                img {
-                    margin-right: 12px;
+            .ticket-management-button {
+                .button-filter {
+                    margin-right: 10px;
+                    &::after {
+                        display: none;
+                    }
+                    img {
+                        margin-right: 12px;
+                    }
+                }
+                .ticket-management-dropdown-menu {
+                    width: 634px;
+                    height: 454px;
+                    background-color: #ffffff;
+                    border-radius: 16px;
+                    left: -100% !important;
+                    top: 300px !important;
+                    padding-top: 24px;
+                    padding-bottom: 23px;
+                    padding-left: 32px;
+                    padding-right: 29px;
+                    .ticket-management-dropdown-title {
+                        text-align: center;
+                        margin-bottom: 26px;
+                    }
+                    .ticket-management-dropdown-item {
+                        .ticket-management-datepicker {
+                            display: flex;
+                            margin-bottom: 20px;
+                            .ticket-management-datepicker-start {
+                                margin-right: 122px;
+                                p {
+                                    @include styleText(#1E0D03, 16px, 600, 26px);
+                                    margin-bottom: 5px;
+                                }
+                            }
+                            .ticket-management-datepicker-end {
+                                p {
+                                    @include styleText(#1E0D03, 16px, 600, 26px);
+                                    margin-bottom: 5px;
+                                }
+                            }
+                        }
+                        .ticket-management-radio {
+                            margin-bottom: 20px;
+                            p {
+                                @include styleText(#1E0D03, 16px, 600, 26px);
+                                margin-bottom: 5px;
+                            }
+                            .ant-radio-group {
+                                .ant-radio-wrapper  {
+                                    span {
+                                        @include styleText(#1E0D03, 16px, 500, 20px);
+                                    }
+                                }
+                            }
+                        }
+                        .ticket-management-checkin {
+                            p {
+                                @include styleText(#1E0D03, 16px, 600, 26px);
+                                margin-bottom: 5px;
+                            }
+                            .ticket-management-checkbox {
+                                margin-bottom: 18px;
+                                .ant-checkbox-wrapper  {
+                                    span {
+                                        @include styleText(#1E0D03, 16px, 500, 20px);
+                                    }
+                                }
+                            }
+                        }
+                        .ticket-management-submit {
+                            margin-top: 22px;
+                            text-align: center;
+                            .button-ouline-orange {
+                                width: 160px;
+                            }
+                        }
+                    }
                 }
             }
         }

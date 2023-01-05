@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import type { DatePickerProps } from 'antd';
 import type { RadioChangeEvent } from 'antd';
 import { DatePicker, Calendar, Button, Radio } from 'antd';
@@ -11,8 +11,9 @@ import { setRadioValueReducer } from '../../Redux/Reducers/HomeReducer/HomeReduc
 import { setValueCalendarReducer } from '../../Redux/Reducers/CalendarReducer/CalendarReducer';
 
 interface porpTime {
-    value: dayjs.Dayjs,
-    format: string
+    value: any,
+    format: string,
+    popupName: string
 }
 
 dayjs.extend(updateLocale);
@@ -29,6 +30,8 @@ dayjs.updateLocale('en', {
 
 export default function DatePickerCom(props: porpTime) {
 
+    let formatValue = dayjs(props.value).format(props.format);
+
     const [preNextMonth, setPreNextMonth] = useState(dayjs());
 
     const dispatch = useAppDispatch();
@@ -43,30 +46,19 @@ export default function DatePickerCom(props: porpTime) {
         dispatch(setRadioValueReducer(e.target.value))
     };
 
-    // const currentWeek = (open) => {
-    //     const weekStart = dayjs().startOf('week').format("YYYY-MM-DD");
-    //     const antdPicker = document.getElementsByClassName("ant-picker-content")
-    //     const tbodyWeek = antdPicker.item(0)?.getElementsByTagName("tbody");
-
-    //     const trWeek = tbodyWeek?.item(0)?.getElementsByTagName("tr");
-
-    //     for (let i in trWeek) {
-    //         let tdWeek = trWeek?.item(parseInt(i))
-    //         let title: string = tdWeek?.getElementsByTagName("td").item(0)?.title as string
-    //         if (weekStart === title) {
-    //             tdWeek?.classList.add("week-current");
-    //         }
-    //     }
-    // }
-
     return (
         <DatePicker
-            popupClassName={"sasasa"}
+            popupClassName={props.popupName}
             onOpenChange={(open) => {
                 if (open) {
                     const weekStart = dayjs().startOf('week').format("YYYY-MM-DD");
-                    const antdPicker = document.getElementsByClassName("ant-picker-content")
-                    const tbodyWeek = antdPicker.item(0)?.getElementsByTagName("tbody");
+                    const picker = document.getElementsByClassName(props.popupName)
+                    const pickerContainer = picker.item(0)?.getElementsByClassName("ant-picker-panel-container");
+                    const pickerCalendar = pickerContainer?.item(0)?.getElementsByClassName("ant-picker-calendar")
+                    const pickerPanel = pickerCalendar?.item(0)?.getElementsByClassName("ant-picker-panel");
+                    const pickerBody = pickerPanel?.item(0)?.getElementsByClassName("ant-picker-body")
+                    const antdPicker = pickerBody?.item(0)?.getElementsByClassName("ant-picker-content")
+                    const tbodyWeek = antdPicker?.item(0)?.getElementsByTagName("tbody");
 
                     const trWeek = tbodyWeek?.item(0)?.getElementsByTagName("tr");
 
@@ -143,9 +135,9 @@ export default function DatePickerCom(props: porpTime) {
                             );
                         }}
                     />}
-            defaultValue={dayjs(props.value, props.format)}
+            placeholder={`${props.value !== null ? formatValue : "dd/mm/yyyy"}`}
             format={props.format}
-            style={{ width: "155px", height: "40px" }}
+            style={{ width: "155px", height: "40px", border: "1px solid #A5A8B1" }}
             onChange={onChange}
             suffixIcon={<img style={{ width: "24px", height: "24px" }} src={require("../../Assets/CalendarIcon/fi_calendar.png")} alt="calendar" />} />
     )

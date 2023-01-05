@@ -26,10 +26,9 @@ export default function Home() {
         <div className='outlet' id="home">
             <div className='outlet-content home-content'>
                 <h2 className='outlet-title'>Thống kê</h2>
-                <DatePickerCom value={today} format={"MMMM, YYYY"} />
                 <div className='d-flex justify-content-between'>
                     <h4 className='home-chart-title'>Doanh thu</h4>
-                    <DatePickerCom value={today} format={"MMMM, YYYY"} />
+                    <DatePickerCom popupName={"picker1"} value={today} format={"MMMM, YYYY"} />
                 </div>
                 <div className='home-chart'>
                     {renderChart()}
@@ -39,7 +38,7 @@ export default function Home() {
                     <p className='home-num-revenue'><span>525.145.000</span> đồng</p>
                 </div>
                 <div className='home-pie'>
-                    <DatePickerCom value={today} format={"MMMM, YYYY"} />
+                    <DatePickerCom popupName={"picker2"} value={today} format={"MMMM, YYYY"} />
                     <PieFamily />
                     <PieEvent />
                     <div className='home-pie-note'>

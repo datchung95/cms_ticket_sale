@@ -1,0 +1,13 @@
+.ant-checkbox-wrapper {
+    .ant-checkbox {
+        width: 24px;
+        height: 24px;
+        .ant-checkbox-inner {
+            width: 24px;
+            height: 24px;
+            &::after {
+                left: 7px !important;
+            }
+        }
+    }
+}
