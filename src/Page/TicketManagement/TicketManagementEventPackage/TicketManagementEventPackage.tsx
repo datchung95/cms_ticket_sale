@@ -1,139 +1,33 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Table } from 'antd';
-import { useAppDispatch } from '../../../Redux/hook';
+import { useAppDispatch, useAppSelector } from '../../../Redux/hook';
 import { CaretLeftOutlined, CaretRightOutlined, MoreOutlined } from '@ant-design/icons';
 import type { ColumnsType } from 'antd/es/table';
 import ModalChangeDate from '../ModalChangeDate/ModalChangeDate';
-import { openModalReducer } from '../../../Redux/Reducers/TicketManagementReducer/TicketManagementReducer';
+import { getAllDataTicketEventManagementReducer, openModalReducer } from '../../../Redux/Reducers/TicketManagementReducer/TicketManagementReducer';
+import { getAllDataAction } from '../../../Redux/Actions/GetAllData/GetAllDataAction';
 
 interface DataType {
-    bookingCode: string;
+    id: string;
     soVe: string;
     tenSuKien: string;
     tinhTrangSuDung: string;
     ngaySuDung: string;
     ngayXuatVe: string;
-    cong: string;
+    congCheckIn: string;
 }
-
-const data: DataType[] = [
-    {
-        bookingCode: 'ALT20210501',
-        soVe: "123456789034",
-        tenSuKien: 'Hội trợ triển lãm tiêu dùng',
-        tinhTrangSuDung: "Đã sử dụng",
-        ngaySuDung: "14/4/2021",
-        ngayXuatVe: "14/4/2021",
-        cong: "Cổng 1"
-    },
-    {
-        bookingCode: 'ALT20210501',
-        soVe: "123456789034",
-        tenSuKien: 'Hội trợ triển lãm tiêu dùng',
-        tinhTrangSuDung: "Chưa sử dụng",
-        ngaySuDung: "14/4/2021",
-        ngayXuatVe: "14/4/2021",
-        cong: "Cổng 1"
-    },
-    {
-        bookingCode: 'ALT20210501',
-        soVe: "123456789034",
-        tenSuKien: 'Hội trợ triển lãm tiêu dùng',
-        tinhTrangSuDung: "Hết hạn",
-        ngaySuDung: "14/4/2021",
-        ngayXuatVe: "14/4/2021",
-        cong: "Cổng 1"
-    },
-    {
-        bookingCode: 'ALT20210501',
-        soVe: "123456789034",
-        tenSuKien: 'Hội trợ triển lãm tiêu dùng',
-        tinhTrangSuDung: "Chưa sử dụng",
-        ngaySuDung: "14/4/2021",
-        ngayXuatVe: "14/4/2021",
-        cong: "Cổng 1"
-    },
-    {
-        bookingCode: 'ALT20210501',
-        soVe: "123456789034",
-        tenSuKien: 'Hội trợ triển lãm tiêu dùng',
-        tinhTrangSuDung: "Đã sử dụng",
-        ngaySuDung: "14/4/2021",
-        ngayXuatVe: "14/4/2021",
-        cong: "Cổng 1"
-    },
-
-    {
-        bookingCode: 'ALT20210501',
-        soVe: "123456789034",
-        tenSuKien: 'Hội trợ triển lãm tiêu dùng',
-        tinhTrangSuDung: "Hết hạn",
-        ngaySuDung: "14/4/2021",
-        ngayXuatVe: "14/4/2021",
-        cong: "Cổng 1"
-    },
-    {
-        bookingCode: 'ALT20210501',
-        soVe: "123456789034",
-        tenSuKien: 'Hội trợ triển lãm tiêu dùng',
-        tinhTrangSuDung: "Hết hạn",
-        ngaySuDung: "14/4/2021",
-        ngayXuatVe: "14/4/2021",
-        cong: "Cổng 1"
-    },
-    {
-        bookingCode: 'ALT20210501',
-        soVe: "123456789034",
-        tenSuKien: 'Hội trợ triển lãm tiêu dùng',
-        tinhTrangSuDung: "Chưa sử dụng",
-        ngaySuDung: "14/4/2021",
-        ngayXuatVe: "14/4/2021",
-        cong: "Cổng 1"
-    },
-
-    {
-        bookingCode: 'ALT20210501',
-        soVe: "123456789034",
-        tenSuKien: 'Hội trợ triển lãm tiêu dùng',
-        tinhTrangSuDung: "Đã sử dụng",
-        ngaySuDung: "14/4/2021",
-        ngayXuatVe: "14/4/2021",
-        cong: "Cổng 1"
-    },
-    {
-        bookingCode: 'ALT20210501',
-        soVe: "123456789034",
-        tenSuKien: 'Hội trợ triển lãm tiêu dùng',
-        tinhTrangSuDung: "Đã sử dụng",
-        ngaySuDung: "14/4/2021",
-        ngayXuatVe: "14/4/2021",
-        cong: "Cổng 1"
-    },
-    {
-        bookingCode: 'ALT20210501',
-        soVe: "123456789034",
-        tenSuKien: 'Hội trợ triển lãm tiêu dùng',
-        tinhTrangSuDung: "Đã sử dụng",
-        ngaySuDung: "14/4/2021",
-        ngayXuatVe: "14/4/2021",
-        cong: "Cổng 1"
-    },
-    {
-        bookingCode: 'ALT20210501',
-        soVe: "123456789034",
-        tenSuKien: 'Hội trợ triển lãm tiêu dùng',
-        tinhTrangSuDung: "Hết hạn",
-        ngaySuDung: "14/4/2021",
-        ngayXuatVe: "14/4/2021",
-        cong: "Cổng 1"
-    },
-];
 
 export default function TicketManagementEventPackage() {
 
-    const dispatch = useAppDispatch()
+    const dispatch = useAppDispatch();
+
+    const { arrDataTicketManagementEvent } = useAppSelector(state => state.TicketManagementReducer);
 
     const [page, setPage] = useState(1);
+
+    useEffect(() => {
+        dispatch(getAllDataAction("ticketEvent", getAllDataTicketEventManagementReducer))
+    }, [])
 
     const itemRender = (_: any, type: any, originalElement: any) => {
         if (type === "prev") {
@@ -154,7 +48,10 @@ export default function TicketManagementEventPackage() {
         },
         {
             title: 'Booking Code',
-            dataIndex: 'bookingCode'
+            dataIndex: 'id',
+            render: (text, record, index) => {
+                return <p className='mb-0'>ALT{text.substr(0, 7).toUpperCase()}</p>
+            }
         },
         {
             title: 'Số vé',
@@ -163,7 +60,7 @@ export default function TicketManagementEventPackage() {
         {
             title: 'Tên sự kiện',
             dataIndex: 'tenSuKien',
-            width: 220.28
+            width: 200
         },
         {
             title: 'Tình trạng sử dụng',
@@ -197,7 +94,7 @@ export default function TicketManagementEventPackage() {
         },
         {
             title: 'Cổng check-in',
-            dataIndex: 'cong',
+            dataIndex: 'congCheckIn',
         },
         {
             render: (text, record, index) => {
@@ -206,9 +103,10 @@ export default function TicketManagementEventPackage() {
                         <div style={{ cursor: "pointer" }} onClick={() => {
                             dispatch(openModalReducer({
                                 openModal: true,
+                                id: text.id,
                                 soVe: text.soVe,
                                 tenSuKien: text.tenSuKien,
-                                checkIn: text.cong
+                                checkIn: text.congCheckIn
                             }))
                         }}><MoreOutlined />
                         </div>
@@ -223,8 +121,9 @@ export default function TicketManagementEventPackage() {
         <div>
             <ModalChangeDate />
             <Table
+                rowKey="id"
                 columns={columns}
-                dataSource={data}
+                dataSource={arrDataTicketManagementEvent}
                 rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-gray'}
                 pagination={{
                     itemRender: itemRender,

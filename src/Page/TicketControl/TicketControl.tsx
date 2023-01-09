@@ -5,7 +5,9 @@ import DatePickerCom from '../../Component/DatePicker/DatePickerCom';
 import FormSearch from '../../Component/FormSearch/FormSearch';
 import { useAppDispatch, useAppSelector } from '../../Redux/hook';
 import { changeTicketManagementPackageReducer } from '../../Redux/Reducers/TicketManagementReducer/TicketManagementReducer';
+import type { DatePickerProps } from 'antd';
 import "./TicketControl.scss"
+import dayjs from 'dayjs';
 
 export default function TicketControl() {
 
@@ -16,12 +18,23 @@ export default function TicketControl() {
     const formik = useFormik({
         enableReinitialize: true,
         initialValues: {
-            tinhTrangDoiSoatRadio: "Tất cả"
+            tinhTrangDoiSoatRadio: "Tất cả",
+            ticketControlPickerStart: "",
+            ticketControlPickerEnd: ""
+            
         },
         onSubmit: (value) => {
             console.log(value)
         }
     })
+
+    const onChangeDatePickerStart: DatePickerProps['onChange'] = (date, dateString) => {
+        formik.setFieldValue("ticketControlPickerStart", dayjs(date).format("DD/MM/YYYY"))
+    };
+
+    const onChangeDatePickerEnd: DatePickerProps['onChange'] = (date, dateString) => {
+        formik.setFieldValue("ticketControlPickerEnd", dayjs(date).format("DD/MM/YYYY"))
+    };
 
     return (
         <div id="ticket-control">
@@ -76,7 +89,7 @@ export default function TicketControl() {
                                             <p className='ticket-control-filter-text'>Từ ngày</p>
                                         </div>
                                         <div className='col-6'>
-                                            <DatePickerCom popupName={"picker-ticket-filter-start"} format={"DD/MM/YYYY"} value={null} />
+                                            <DatePickerCom onChangeDatePicker={onChangeDatePickerStart} name={"ticketControlPickerStart"} popupName={"picker-ticket-filter-start"} format={"DD/MM/YYYY"} value={null} />
                                         </div>
                                     </div>
                                     <div className='row ticket-control-filter-form'>
@@ -84,7 +97,7 @@ export default function TicketControl() {
                                             <p className='ticket-control-filter-text'>Đến ngày</p>
                                         </div>
                                         <div className='col-6'>
-                                            <DatePickerCom popupName={"picker-ticket-filter-end"} format={"DD/MM/YYYY"} value={null} />
+                                            <DatePickerCom onChangeDatePicker={onChangeDatePickerEnd} name={"ticketControlPickerEnd"} popupName={"picker-ticket-filter-end"} format={"DD/MM/YYYY"} value={null} />
                                         </div>
                                     </div>
                                     <div className='text-center ticket-control-filter-button'>

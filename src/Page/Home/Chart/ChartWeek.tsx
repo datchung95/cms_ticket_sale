@@ -6,6 +6,7 @@ import { useAppSelector } from '../../../Redux/hook';
 export default function ChartWeek() {
 
     const { valueCalendar } = useAppSelector(state => state.CalendarReducer);
+    console.log(valueCalendar)
 
     const selectWeek = ()  => {
         if (valueCalendar === "") {

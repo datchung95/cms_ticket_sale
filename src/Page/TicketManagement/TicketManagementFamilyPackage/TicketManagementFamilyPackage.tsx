@@ -1,126 +1,32 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Table } from 'antd';
-import { useAppDispatch } from '../../../Redux/hook';
+import { useAppDispatch, useAppSelector } from '../../../Redux/hook';
 import { CaretLeftOutlined, CaretRightOutlined, MoreOutlined } from '@ant-design/icons';
 import type { ColumnsType } from 'antd/es/table';
 import ModalChangeDate from '../ModalChangeDate/ModalChangeDate';
-import { openModalReducer } from '../../../Redux/Reducers/TicketManagementReducer/TicketManagementReducer';
+import { getAllDataTicketFamilyManagementReducer, openModalReducer } from '../../../Redux/Reducers/TicketManagementReducer/TicketManagementReducer';
+import { getAllDataAction } from '../../../Redux/Actions/GetAllData/GetAllDataAction';
 
 interface DataType {
-    bookingCode: string;
+    id: string;
     soVe: string;
     tinhTrangSuDung: string;
     ngaySuDung: string;
     ngayXuatVe: string;
-    cong: string;
+    congCheckIn: string;
 }
-
-const data: DataType[] = [
-    {
-        bookingCode: 'ALT20210501',
-        soVe: "123456789034",
-        tinhTrangSuDung: "Đã sử dụng",
-        ngaySuDung: "14/4/2021",
-        ngayXuatVe: "14/4/2021",
-        cong: "Cổng 1"
-    },
-    {
-        bookingCode: 'ALT20210501',
-        soVe: "123456789034",
-        tinhTrangSuDung: "Chưa sử dụng",
-        ngaySuDung: "14/4/2021",
-        ngayXuatVe: "14/4/2021",
-        cong: "Cổng 1"
-    },
-    {
-        bookingCode: 'ALT20210501',
-        soVe: "123456789034",
-        tinhTrangSuDung: "Hết hạn",
-        ngaySuDung: "14/4/2021",
-        ngayXuatVe: "14/4/2021",
-        cong: "Cổng 1"
-    },
-    {
-        bookingCode: 'ALT20210501',
-        soVe: "123456789034",
-        tinhTrangSuDung: "Chưa sử dụng",
-        ngaySuDung: "14/4/2021",
-        ngayXuatVe: "14/4/2021",
-        cong: "Cổng 1"
-    },
-    {
-        bookingCode: 'ALT20210501',
-        soVe: "123456789034",
-        tinhTrangSuDung: "Đã sử dụng",
-        ngaySuDung: "14/4/2021",
-        ngayXuatVe: "14/4/2021",
-        cong: "Cổng 1"
-    },
-
-    {
-        bookingCode: 'ALT20210501',
-        soVe: "123456789034",
-        tinhTrangSuDung: "Hết hạn",
-        ngaySuDung: "14/4/2021",
-        ngayXuatVe: "14/4/2021",
-        cong: "Cổng 1"
-    },
-    {
-        bookingCode: 'ALT20210501',
-        soVe: "123456789034",
-        tinhTrangSuDung: "Hết hạn",
-        ngaySuDung: "14/4/2021",
-        ngayXuatVe: "14/4/2021",
-        cong: "Cổng 1"
-    },
-    {
-        bookingCode: 'ALT20210501',
-        soVe: "123456789034",
-        tinhTrangSuDung: "Chưa sử dụng",
-        ngaySuDung: "14/4/2021",
-        ngayXuatVe: "14/4/2021",
-        cong: "Cổng 1"
-    },
-
-    {
-        bookingCode: 'ALT20210501',
-        soVe: "123456789034",
-        tinhTrangSuDung: "Đã sử dụng",
-        ngaySuDung: "14/4/2021",
-        ngayXuatVe: "14/4/2021",
-        cong: "Cổng 1"
-    },
-    {
-        bookingCode: 'ALT20210501',
-        soVe: "123456789034",
-        tinhTrangSuDung: "Đã sử dụng",
-        ngaySuDung: "14/4/2021",
-        ngayXuatVe: "14/4/2021",
-        cong: "Cổng 1"
-    },
-    {
-        bookingCode: 'ALT20210501',
-        soVe: "123456789034",
-        tinhTrangSuDung: "Đã sử dụng",
-        ngaySuDung: "14/4/2021",
-        ngayXuatVe: "14/4/2021",
-        cong: "Cổng 1"
-    },
-    {
-        bookingCode: 'ALT20210501',
-        soVe: "123456789034",
-        tinhTrangSuDung: "Hết hạn",
-        ngaySuDung: "14/4/2021",
-        ngayXuatVe: "14/4/2021",
-        cong: "Cổng 1"
-    },
-];
 
 export default function TicketManagementFamilyPackage() {
 
-    const dispatch = useAppDispatch()
+    const dispatch = useAppDispatch();
+
+    const { arrDataTicketManagementFamily } = useAppSelector(state => state.TicketManagementReducer)
 
     const [page, setPage] = useState(1);
+
+    useEffect(() => {
+        dispatch(getAllDataAction("ticketFamily", getAllDataTicketFamilyManagementReducer));
+    }, [])
 
     const itemRender = (_: any, type: any, originalElement: any) => {
         if (type === "prev") {
@@ -141,7 +47,10 @@ export default function TicketManagementFamilyPackage() {
         },
         {
             title: 'Booking Code',
-            dataIndex: 'bookingCode'
+            dataIndex: 'id',
+            render: (text, record, index) => {
+                return <p className='mb-0'>ALT{text.substr(0, 7).toUpperCase()}</p>
+            },
         },
         {
             title: 'Số vé',
@@ -179,7 +88,7 @@ export default function TicketManagementFamilyPackage() {
         },
         {
             title: 'Cổng check-in',
-            dataIndex: 'cong',
+            dataIndex: 'congCheckIn',
         },
         {
             render: (text, record, index) => {
@@ -188,9 +97,10 @@ export default function TicketManagementFamilyPackage() {
                         <div style={{ cursor: "pointer" }} onClick={() => {
                             dispatch(openModalReducer({
                                 openModal: true,
+                                id: text.id,
                                 soVe: text.soVe,
                                 tenSuKien: "",
-                                checkIn: text.cong
+                                checkIn: text.congCheckIn
                             }))
                         }}><MoreOutlined />
                         </div>
@@ -204,8 +114,9 @@ export default function TicketManagementFamilyPackage() {
         <div>
             <ModalChangeDate />
             <Table
+                rowKey="id"
                 columns={columns}
-                dataSource={data}
+                dataSource={arrDataTicketManagementFamily}
                 rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-gray'}
                 pagination={{
                     itemRender: itemRender,

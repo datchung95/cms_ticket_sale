@@ -2,10 +2,12 @@ import { Checkbox, Input, TimePicker } from 'antd'
 import React from 'react'
 import DatePickerCom from '../../../Component/DatePicker/DatePickerCom'
 import { TimePickerProps, Select } from 'antd';
+import type { DatePickerProps } from 'antd';
 import type { CheckboxChangeEvent } from 'antd/es/checkbox';
 import { useFormik } from 'formik';
 import "./AddTicketPackage.scss"
 import { useNavigate } from 'react-router-dom';
+import dayjs from 'dayjs';
 
 export default function AddTicketPackage() {
 
@@ -17,7 +19,9 @@ export default function AddTicketPackage() {
             giaVe: {
                 veLe: false,
                 combo: false
-            }
+            },
+            addTicketPickerStart: "",
+            addTicketPickerEnd: ""
         },
         onSubmit: (value) => {
             console.log(value)
@@ -36,6 +40,14 @@ export default function AddTicketPackage() {
         console.log(`selected ${value}`);
     };
 
+    const onChangeDatePickerStart: DatePickerProps['onChange'] = (date, dateString) => {
+        formik.setFieldValue("addTicketPickerStart", dayjs(date).format("DD/MM/YYYY"))
+    };
+
+    const onChangeDatePickerEnd: DatePickerProps['onChange'] = (date, dateString) => {
+        formik.setFieldValue("addTicketPickerEnd", dayjs(date).format("DD/MM/YYYY"))
+    };
+
     return (
         <div className='outlet' id="add-ticket-package">
             <div className='outlet-content add-ticket-package-top'>
@@ -51,7 +63,7 @@ export default function AddTicketPackage() {
                     <div className='row add-ticket-package-date'>
                         <div className='col-6 add-ticket-package-date-start'>
                             <p className='add-ticket-package-text'>Ngày áp dụng</p>
-                            <DatePickerCom popupName={"add-ticket-package-start"} format={"DD/MM/YYYY"} value={null} />
+                            <DatePickerCom onChangeDatePicker={onChangeDatePickerStart} name={"addTicketPickerStart"} popupName={"add-ticket-package-start"} format={"DD/MM/YYYY"} value={null} />
                             <TimePicker
                                 popupClassName='time-picker-dropdown'
                                 className='add-ticket-package-date-start-time time-picker'
@@ -61,7 +73,7 @@ export default function AddTicketPackage() {
                         </div>
                         <div className='col-6 add-ticket-package-date-end'>
                             <p className='add-ticket-package-text'>Ngày hết hạn</p>
-                            <DatePickerCom popupName={"add-ticket-package-end"} format={"DD/MM/YYYY"} value={null} />
+                            <DatePickerCom onChangeDatePicker={onChangeDatePickerEnd} name={"addTicketPickerEnd"} popupName={"add-ticket-package-end"} format={"DD/MM/YYYY"} value={null} />
                             <TimePicker
                                 popupClassName='time-picker-dropdown'
                                 className='add-ticket-package-date-end-time time-picker'

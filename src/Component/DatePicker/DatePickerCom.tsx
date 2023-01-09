@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import type { DatePickerProps } from 'antd';
 import type { RadioChangeEvent } from 'antd';
 import { DatePicker, Calendar, Button, Radio } from 'antd';
 import dayjs from "dayjs"
@@ -8,12 +7,13 @@ import "./DatePickerCom.scss"
 import { } from 'react-redux'
 import { useAppDispatch, useAppSelector } from '../../Redux/hook';
 import { setRadioValueReducer } from '../../Redux/Reducers/HomeReducer/HomeReducer';
-import { setValueCalendarReducer } from '../../Redux/Reducers/CalendarReducer/CalendarReducer';
 
 interface porpTime {
     value: any,
     format: string,
-    popupName: string
+    popupName: string,
+    name: string,
+    onChangeDatePicker: any
 }
 
 dayjs.extend(updateLocale);
@@ -38,16 +38,13 @@ export default function DatePickerCom(props: porpTime) {
 
     const { radioValue } = useAppSelector(state => state.HomeReducer)
 
-    const onChange: DatePickerProps['onChange'] = (date, dateString) => {
-        dispatch(setValueCalendarReducer(dayjs(date).format("YYYY-MM-DD")))
-    };
-
     const onChangeRadio = (e: RadioChangeEvent) => {
         dispatch(setRadioValueReducer(e.target.value))
     };
 
     return (
         <DatePicker
+            name={props.name}
             popupClassName={props.popupName}
             onOpenChange={(open) => {
                 if (open) {
@@ -72,37 +69,38 @@ export default function DatePickerCom(props: porpTime) {
                 }
             }}
             panelRender={(panelNode) =>
-                radioValue === true ? <Calendar
-                    className='calendar-day'
-                    fullscreen={false}
-                    headerRender={({ value }) => {
-                        value = preNextMonth
-                        const year: number = value.year();
+                radioValue === true ?
+                    <Calendar
+                        className='calendar-day'
+                        fullscreen={false}
+                        headerRender={({ value }) => {
+                            value = preNextMonth
+                            const year: number = value.year();
 
-                        const monthName: string = dayjs(value).format("MMMM");
-                        return (
-                            <div className='date-header'>
-                                <div className='d-flex align-items-center date-header-top'>
-                                    {<Button className='date-pre-button' type="link" onClick={() =>
-                                        setPreNextMonth(preNextMonth.add(-1, 'months'))}>
-                                        <img className='date-pre-icon' src={require("../../Assets/CalendarIcon/Previous.png")} alt="calendarpre" />
-                                    </Button>}
-                                    <p className='m-0 date-title-name'>
-                                        <span>{monthName} </span>
-                                        <span>{year}</span>
-                                    </p>
-                                    {<Button className='date-next-button' type="link" onClick={() => setPreNextMonth(preNextMonth.add(1, 'months'))}>
-                                        <img className='date-next-icon' src={require("../../Assets/CalendarIcon/Next.png")} alt="calendarnext" />
-                                    </Button>}
+                            const monthName: string = dayjs(value).format("MMMM");
+                            return (
+                                <div className='date-header'>
+                                    <div className='d-flex align-items-center date-header-top'>
+                                        {<Button className='date-pre-button' type="link" onClick={() =>
+                                            setPreNextMonth(preNextMonth.add(-1, 'months'))}>
+                                            <img className='date-pre-icon' src={require("../../Assets/CalendarIcon/Previous.png")} alt="calendarpre" />
+                                        </Button>}
+                                        <p className='m-0 date-title-name'>
+                                            <span>{monthName} </span>
+                                            <span>{year}</span>
+                                        </p>
+                                        {<Button className='date-next-button' type="link" onClick={() => setPreNextMonth(preNextMonth.add(1, 'months'))}>
+                                            <img className='date-next-icon' src={require("../../Assets/CalendarIcon/Next.png")} alt="calendarnext" />
+                                        </Button>}
+                                    </div>
+                                    <Radio.Group className='date-header-bottom' onChange={onChangeRadio} value={radioValue}>
+                                        <Radio value={true}>Theo ngày</Radio>
+                                        <Radio value={false}>Theo tuần</Radio>
+                                    </Radio.Group>
                                 </div>
-                                <Radio.Group className='date-header-bottom' onChange={onChangeRadio} value={radioValue}>
-                                    <Radio value={true}>Theo ngày</Radio>
-                                    <Radio value={false}>Theo tuần</Radio>
-                                </Radio.Group>
-                            </div>
-                        );
-                    }}
-                /> :
+                            );
+                        }}
+                    /> :
 
                     <Calendar
                         className='calendar-month'
@@ -138,7 +136,7 @@ export default function DatePickerCom(props: porpTime) {
             placeholder={`${props.value !== null ? formatValue : "dd/mm/yyyy"}`}
             format={props.format}
             style={{ width: "155px", height: "40px", border: "1px solid #A5A8B1" }}
-            onChange={onChange}
+            onChange={props.onChangeDatePicker}
             suffixIcon={<img style={{ width: "24px", height: "24px" }} src={require("../../Assets/CalendarIcon/fi_calendar.png")} alt="calendar" />} />
     )
 }

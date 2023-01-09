@@ -1,0 +1,1 @@
+export const DOMAIN = "https://firestore.googleapis.com/v1/projects/cms-ticlet-sale/databases/(default)/documents"

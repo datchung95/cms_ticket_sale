@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "./TicketManagement.scss"
 import { useAppDispatch, useAppSelector } from '../../Redux/hook';
 import { changeTicketManagementPackageReducer } from '../../Redux/Reducers/TicketManagementReducer/TicketManagementReducer';
@@ -7,13 +7,13 @@ import TicketManagementEventPackage from './TicketManagementEventPackage/TicketM
 import TicketManagementFamilyPackage from './TicketManagementFamilyPackage/TicketManagementFamilyPackage';
 import FormSearch from '../../Component/FormSearch/FormSearch';
 
-
-
 export default function TicketManagement() {
 
     const dispatch = useAppDispatch()
 
     const { changePackage } = useAppSelector(state => state.TicketManagementReducer);
+
+    const [show, setShow] = useState(false)
 
     const renderTicketManagementPackage = () => {
         if (changePackage) {
@@ -34,12 +34,12 @@ export default function TicketManagement() {
                 <div className='ticket-management-form'>
                     <FormSearch />
                     <div className='ticket-management-button'>
-                        <div className='dropdown show d-inline ticket-management-dropdown'>
-                            <button className='button-ouline-orange button-filter dropdown-toggle' data-toggle="dropdown">
+                        <div className='d-inline ticket-management-dropdown'>
+                            <button className='button-ouline-orange button-filter' onClick={() => {setShow(!show)}}>
                                 <img src={require("../../Assets/ButtonIcon/filter.png")} alt="buttonfilter" />
                                 Lọc vé
                             </button>
-                            <DropdownTicketFilter />
+                            <DropdownTicketFilter show={show} />
                         </div>
                         <button className='button-ouline-orange'>
                             Xuất file (.csv)
