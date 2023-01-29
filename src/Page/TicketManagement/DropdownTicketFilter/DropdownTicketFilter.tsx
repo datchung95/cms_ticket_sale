@@ -8,6 +8,7 @@ import { useAppDispatch } from '../../../Redux/hook';
 import dayjs from 'dayjs';
 import { filterTicketManagementReducer, getAllDataTicketEventManagementReducer, getAllDataTicketFamilyManagementReducer } from '../../../Redux/Reducers/TicketManagementReducer/TicketManagementReducer';
 import { getAllDataAction } from '../../../Redux/Actions/GetAllData/GetAllDataAction';
+import { TICKETEVENT, TICKETFAMILY } from '../../../Const/Const';
 
 interface DropdownShow {
     show: boolean
@@ -33,9 +34,8 @@ export default function DropdownTicketFilter(props: DropdownShow) {
             pickerTicketManagementEnd: ""
         },
         onSubmit: async (value) => {
-            console.log(value)
-            await dispatch(getAllDataAction("ticketFamily", getAllDataTicketFamilyManagementReducer));
-            await dispatch(getAllDataAction("ticketEvent", getAllDataTicketEventManagementReducer));
+            await dispatch(getAllDataAction(TICKETFAMILY, getAllDataTicketFamilyManagementReducer));
+            await dispatch(getAllDataAction(TICKETEVENT, getAllDataTicketEventManagementReducer));
             dispatch(filterTicketManagementReducer(value))
         }
     })

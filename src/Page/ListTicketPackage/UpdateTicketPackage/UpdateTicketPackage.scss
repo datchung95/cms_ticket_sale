@@ -1,8 +1,8 @@
 @import "../../../Style/Helper/mixin";
 
-#add-ticket-package {
-    .add-ticket-package-top {
-        .add-ticket-package-title {
+#update-ticket-package {
+    .update-ticket-package-top {
+        .update-ticket-package-title {
             @include styleText(#1E0D03, 24px, 700, 30px);
             margin-bottom: 27px;
             text-align: center;
@@ -10,82 +10,88 @@
     }
 
     form {
-        .add-ticket-package-name {
+        .update-ticket-package-event {
+            margin-bottom: 25px;
+            .update-ticket-package-event-input {
+                width: 245px;
+            }
+        }
+        .update-ticket-package-name {
             margin-bottom: 25px;
         }
-        .add-ticket-package-date {
+        .update-ticket-package-date {
             margin-bottom: 24px;
-            .add-ticket-package-date-start {
-                .add-ticket-package-date-start-time {
+            .update-ticket-package-date-start {
+                .update-ticket-package-date-start-time {
                     margin-left: 9px;
                 }
             }
-            .add-ticket-package-date-end {
-                .add-ticket-package-date-end-time {
+            .update-ticket-package-date-end {
+                .update-ticket-package-date-end-time {
                     margin-left: 9px;
                 }
             }
         }
-        .add-ticket-package-price {
+        .update-ticket-package-price {
             margin-bottom: 24px;
-            .add-ticket-package-price-top {
+            .update-ticket-package-price-top {
                 margin-bottom: 22px;
                 .ant-checkbox-wrapper {
                     span {
                         @include styleText(#1E0D03, 16px, 500, 20px);
                     }
                 }
-                .add-ticket-package-price-top-input {
+                .update-ticket-package-price-top-input {
                     margin-right: 8px;
                 }
             }
-            .add-ticket-package-price-bottom {
+            .update-ticket-package-price-bottom {
                 .ant-checkbox-wrapper {
                     span {
                         @include styleText(#1E0D03, 16px, 500, 20px);
                     }
                 }
-                .add-ticket-package-price-bottom-input {
+                .update-ticket-package-price-bottom-input {
                     margin-right: 8px;
                 }
-                .add-ticket-package-price-bottom-input-ticket {
+                .update-ticket-package-price-bottom-input-ticket {
                     margin: 0 8px;
                 }
             }
         }
-        .add-ticket-package-price-status {
+        .update-ticket-package-price-status {
             margin-bottom: 11px;
             .ant-select-selection-item {
                 @include styleText(#1E0D03, 16px, 500, 20px);
-            } 
+            }      
         }
-        .add-ticket-package-note {
+        .update-ticket-package-note {
             display: flex;
             align-items: center;
-            .add-ticket-package-note-star {
+            .update-ticket-package-note-star {
                 @include styleText(#FD5959, 16px, 600, 26px);
                 margin-right: 4px;
             }
-            .add-ticket-package-note-info {
+            .update-ticket-package-note-info {
                 @include styleText(#1E0D03, 12px, 400, 15px);
                 font-style: italic;
                 opacity: 0.4;
             }
         }
-        .add-ticket-package-button {
+        .update-ticket-package-button {
             text-align: center;
-            .add-ticket-package-button-cancel {
+            .update-ticket-package-button-cancel {
                 width: 160px;
                 margin-right: 24px;
             }
-            .add-ticket-package-button-save {
+            .update-ticket-package-button-save {
                 width: 160px;
             }
         }
 
 
 
-        .add-ticket-package-text {
+        .update-ticket-package-text {
             @include styleText(#1E0D03, 16px, 600, 26px);
             margin-bottom: 5px;
             span {

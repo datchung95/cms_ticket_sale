@@ -8,6 +8,7 @@ import "./ModalChangeDate.scss"
 import { useFormik } from 'formik';
 import dayjs from 'dayjs';
 import { updateDateDocumentAction } from '../../../Redux/Actions/UpdateData/UpdateDataAction';
+import { TICKETEVENT, TICKETFAMILY } from '../../../Const/Const';
 
 export default function ModalChangeDate() {
 
@@ -24,7 +25,7 @@ export default function ModalChangeDate() {
         onSubmit: async (value) => {
             formik.values.ticket = modalChangeValue.id
             if (formik.values.modalChangeDatePickerFamily !== "") {  
-                await dispatch(updateDateDocumentAction("ticketFamily", formik.values.ticket, formik.values.modalChangeDatePickerFamily, getAllDataTicketFamilyManagementReducer))
+                await dispatch(updateDateDocumentAction(TICKETFAMILY, formik.values.ticket, formik.values.modalChangeDatePickerFamily, getAllDataTicketFamilyManagementReducer))
                 dispatch(openModalReducer({
                     openModal: false,
                     id: "",
@@ -35,7 +36,7 @@ export default function ModalChangeDate() {
             }
 
             if (formik.values.modalChangeDatePickerEvent !== "") {
-                await dispatch(updateDateDocumentAction("ticketEvent", formik.values.ticket, formik.values.modalChangeDatePickerEvent, getAllDataTicketEventManagementReducer))
+                await dispatch(updateDateDocumentAction(TICKETEVENT, formik.values.ticket, formik.values.modalChangeDatePickerEvent, getAllDataTicketEventManagementReducer))
                 dispatch(openModalReducer({
                     openModal: false,
                     id: "",

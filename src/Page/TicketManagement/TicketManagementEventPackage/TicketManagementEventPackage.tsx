@@ -6,6 +6,7 @@ import type { ColumnsType } from 'antd/es/table';
 import ModalChangeDate from '../ModalChangeDate/ModalChangeDate';
 import { getAllDataTicketEventManagementReducer, openModalReducer } from '../../../Redux/Reducers/TicketManagementReducer/TicketManagementReducer';
 import { getAllDataAction } from '../../../Redux/Actions/GetAllData/GetAllDataAction';
+import { TICKETEVENT } from '../../../Const/Const';
 
 interface DataType {
     id: string;
@@ -26,7 +27,7 @@ export default function TicketManagementEventPackage() {
     const [page, setPage] = useState(1);
 
     useEffect(() => {
-        dispatch(getAllDataAction("ticketEvent", getAllDataTicketEventManagementReducer))
+        dispatch(getAllDataAction(TICKETEVENT, getAllDataTicketEventManagementReducer))
     }, [])
 
     const itemRender = (_: any, type: any, originalElement: any) => {
@@ -43,7 +44,7 @@ export default function TicketManagementEventPackage() {
         {
             title: 'STT',
             render: (text, record, index) => {
-                return <p>{(page - 1) * 10 + index + 1}</p>
+                return <div>{(page - 1) * 10 + index + 1}</div>
             },
         },
         {
@@ -95,6 +96,9 @@ export default function TicketManagementEventPackage() {
         {
             title: 'Cổng check-in',
             dataIndex: 'congCheckIn',
+            render: (text, record, index) => {
+                return <p className='mb-0'>Cổng {text}</p>
+            }
         },
         {
             render: (text, record, index) => {

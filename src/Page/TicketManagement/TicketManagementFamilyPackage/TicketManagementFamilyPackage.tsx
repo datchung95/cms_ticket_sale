@@ -6,6 +6,7 @@ import type { ColumnsType } from 'antd/es/table';
 import ModalChangeDate from '../ModalChangeDate/ModalChangeDate';
 import { getAllDataTicketFamilyManagementReducer, openModalReducer } from '../../../Redux/Reducers/TicketManagementReducer/TicketManagementReducer';
 import { getAllDataAction } from '../../../Redux/Actions/GetAllData/GetAllDataAction';
+import { TICKETFAMILY } from '../../../Const/Const';
 
 interface DataType {
     id: string;
@@ -20,13 +21,21 @@ export default function TicketManagementFamilyPackage() {
 
     const dispatch = useAppDispatch();
 
-    const { arrDataTicketManagementFamily } = useAppSelector(state => state.TicketManagementReducer)
+    const { arrDataTicketManagementFamily, changePackage } = useAppSelector(state => state.TicketManagementReducer)
 
     const [page, setPage] = useState(1);
 
     useEffect(() => {
-        dispatch(getAllDataAction("ticketFamily", getAllDataTicketFamilyManagementReducer));
+        dispatch(getAllDataAction(TICKETFAMILY, getAllDataTicketFamilyManagementReducer));
     }, [])
+
+    const filterTicketOrther = () => {
+        let arrFilterTicketOrther: any[] = []
+        if (changePackage !== " Gói sự kiện") {
+            arrFilterTicketOrther = arrDataTicketManagementFamily.filter(item => item.tenGoi === changePackage)
+        }
+        return arrFilterTicketOrther
+    }
 
     const itemRender = (_: any, type: any, originalElement: any) => {
         if (type === "prev") {
@@ -42,7 +51,7 @@ export default function TicketManagementFamilyPackage() {
         {
             title: 'STT',
             render: (text, record, index) => {
-                return <p>{(page - 1) * 10 + index + 1}</p>
+                return <div>{(page - 1) * 10 + index + 1}</div>
             },
         },
         {
@@ -89,6 +98,9 @@ export default function TicketManagementFamilyPackage() {
         {
             title: 'Cổng check-in',
             dataIndex: 'congCheckIn',
+            render: (text, record, index) => {
+                return <p className='mb-0'>Cổng {text}</p>
+            }
         },
         {
             render: (text, record, index) => {
@@ -116,7 +128,7 @@ export default function TicketManagementFamilyPackage() {
             <Table
                 rowKey="id"
                 columns={columns}
-                dataSource={arrDataTicketManagementFamily}
+                dataSource={filterTicketOrther()}
                 rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-gray'}
                 pagination={{
                     itemRender: itemRender,

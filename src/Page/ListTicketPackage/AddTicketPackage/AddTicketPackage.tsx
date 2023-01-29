@@ -1,51 +1,85 @@
 import { Checkbox, Input, TimePicker } from 'antd'
-import React from 'react'
+import React, { useState } from 'react'
 import DatePickerCom from '../../../Component/DatePicker/DatePickerCom'
 import { TimePickerProps, Select } from 'antd';
 import type { DatePickerProps } from 'antd';
-import type { CheckboxChangeEvent } from 'antd/es/checkbox';
 import { useFormik } from 'formik';
 import "./AddTicketPackage.scss"
 import { useNavigate } from 'react-router-dom';
 import dayjs from 'dayjs';
+import * as Yup from 'yup'
+import { useAppDispatch } from '../../../Redux/hook';
+import { addDocumentPackage } from '../../../Redux/Actions/AddData/AddDataAction';
+import { getAllDataTicketPackageReducer } from '../../../Redux/Reducers/TicketPackageReducer/TicketPackageReducer';
+import { PACKAGE } from '../../../Const/Const';
 
 export default function AddTicketPackage() {
 
     const navigate = useNavigate()
 
+    const dispatch = useAppDispatch()
+
+    const [chonGiaVe, setChonGiaVe] = useState(false)
+
+    const [chonGiaCombo, setChonGiaCombo] = useState(false)
+
     const formik = useFormik({
         enableReinitialize: true,
         initialValues: {
-            giaVe: {
-                veLe: false,
-                combo: false
-            },
-            addTicketPickerStart: "",
-            addTicketPickerEnd: ""
+            giaVe: 0,
+            giaCombo: 0,
+            comboVe: 0,
+            tenGoi: "",
+            tinhTrang: "Đang áp dụng",
+            ngayApDungGoi: "",
+            ngayKetThucGoi: "",
+            gioApDungGoi: "",
+            gioKetThucGoi: "",
+            maSuKien: "",
+            tenSuKien: ""
         },
+        validationSchema: Yup.object().shape({
+            tenGoi: Yup.string().trim().required("Tên gói vé là trường bắt buộc")
+        }),
         onSubmit: (value) => {
-            console.log(value)
+            dispatch(addDocumentPackage(PACKAGE, value, getAllDataTicketPackageReducer))
         }
     })
 
-    const onChangeCheckbox = (name: string, e: CheckboxChangeEvent) => {
-        formik.setFieldValue(name, e.target.checked)
+    const onChangeTimePickerStart: TimePickerProps['onChange'] = (time, timeString) => {
+        if (timeString !== "") {
+            formik.setFieldValue("gioApDungGoi", dayjs(time).format("HH:mm:ss"))
+        } else {
+            formik.setFieldValue("gioApDungGoi", "")
+        }
     };
 
-    const onChangeTimePicker: TimePickerProps['onChange'] = (time, timeString) => {
-
+    const onChangeTimePickerEnd: TimePickerProps['onChange'] = (time, timeString) => {
+        if (timeString !== "") {
+            formik.setFieldValue("gioKetThucGoi", dayjs(time).format("HH:mm:ss"))
+        } else {
+            formik.setFieldValue("gioKetThucGoi", "")
+        }
     };
 
     const handleChangeSelect = (value: string) => {
-        console.log(`selected ${value}`);
+        formik.setFieldValue("tinhTrang", value)
     };
 
     const onChangeDatePickerStart: DatePickerProps['onChange'] = (date, dateString) => {
-        formik.setFieldValue("addTicketPickerStart", dayjs(date).format("DD/MM/YYYY"))
+        if (dateString !== "") {
+            formik.setFieldValue("ngayApDungGoi", dayjs(date).format("DD/MM/YYYY"))
+        } else {
+            formik.setFieldValue("ngayApDungGoi", "")
+        }
     };
 
     const onChangeDatePickerEnd: DatePickerProps['onChange'] = (date, dateString) => {
-        formik.setFieldValue("addTicketPickerEnd", dayjs(date).format("DD/MM/YYYY"))
+        if (dateString !== "") {
+            formik.setFieldValue("ngayKetThucGoi", dayjs(date).format("DD/MM/YYYY"))
+        } else {
+            formik.setFieldValue("ngayKetThucGoi", "")
+        }
     };
 
     return (
@@ -56,7 +90,8 @@ export default function AddTicketPackage() {
                     <div className='row add-ticket-package-name'>
                         <div className='col-6'>
                             <p className='add-ticket-package-text'>Tên gói vé <span>*</span></p>
-                            <Input className='add-ticket-package-name-input' placeholder='Nhập tên gói vé' />
+                            <Input name="tenGoi" onChange={formik.handleChange} className='add-ticket-package-name-input' placeholder='Nhập tên gói vé' />
+                            {formik.touched.tenGoi && <p className='text-danger'>{formik.errors.tenGoi}</p>}
                         </div>
                         <div className='col-6'></div>
                     </div>
@@ -65,9 +100,10 @@ export default function AddTicketPackage() {
                             <p className='add-ticket-package-text'>Ngày áp dụng</p>
                             <DatePickerCom onChangeDatePicker={onChangeDatePickerStart} name={"addTicketPickerStart"} popupName={"add-ticket-package-start"} format={"DD/MM/YYYY"} value={null} />
                             <TimePicker
+                                name='timePickerStart'
                                 popupClassName='time-picker-dropdown'
                                 className='add-ticket-package-date-start-time time-picker'
-                                onChange={onChangeTimePicker}
+                                onChange={onChangeTimePickerStart}
                                 suffixIcon={<img src={require("../../../Assets/CalendarIcon/icontime.png")} alt="time" />}
                                 placeholder="hh:mm:ss" />
                         </div>
@@ -75,9 +111,10 @@ export default function AddTicketPackage() {
                             <p className='add-ticket-package-text'>Ngày hết hạn</p>
                             <DatePickerCom onChangeDatePicker={onChangeDatePickerEnd} name={"addTicketPickerEnd"} popupName={"add-ticket-package-end"} format={"DD/MM/YYYY"} value={null} />
                             <TimePicker
+                                name='timePickerEnd'
                                 popupClassName='time-picker-dropdown'
                                 className='add-ticket-package-date-end-time time-picker'
-                                onChange={onChangeTimePicker}
+                                onChange={onChangeTimePickerEnd}
                                 suffixIcon={<img src={require("../../../Assets/CalendarIcon/icontime.png")} alt="time" />}
                                 placeholder="hh:mm:ss" />
                         </div>
@@ -85,8 +122,11 @@ export default function AddTicketPackage() {
                     <div className='add-ticket-package-price'>
                         <p className='add-ticket-package-text'>Giá vé áp dụng</p>
                         <div className='add-ticket-package-price-top'>
-                            <Checkbox onChange={(e) => { onChangeCheckbox("giaVe.veLe", e) }} checked={formik.values.giaVe.veLe}>Vé lẻ (vnđ/vé) với giá</Checkbox>
-                            {formik.values.giaVe.veLe ? <Input
+                            <Checkbox onChange={(e) => { setChonGiaVe(e.target.checked) }} checked={chonGiaVe}>Vé lẻ (vnđ/vé) với giá</Checkbox>
+                            {chonGiaVe ? <Input
+                                onChange={formik.handleChange}
+                                name="giaVe"
+                                type="number"
                                 className='add-ticket-package-price-top-input'
                                 disabled={false}
                                 style={{ width: "148px", border: "1px solid #A5A8B1" }}
@@ -99,8 +139,11 @@ export default function AddTicketPackage() {
                                     placeholder='Giá vé' />} / vé
                         </div>
                         <div className='add-ticket-package-price-bottom'>
-                            <Checkbox onChange={(e) => { onChangeCheckbox("giaVe.combo", e) }} checked={formik.values.giaVe.combo}>Combo vé với giá</Checkbox>
-                            {formik.values.giaVe.combo ? <Input
+                            <Checkbox onChange={(e) => { setChonGiaCombo(e.target.checked) }} checked={chonGiaCombo}>Combo vé với giá</Checkbox>
+                            {chonGiaCombo ? <Input
+                                onChange={formik.handleChange}
+                                name="giaCombo"
+                                type="number"
                                 className='add-ticket-package-price-bottom-input'
                                 disabled={false}
                                 style={{ width: "148px", border: "1px solid #A5A8B1" }}
@@ -112,7 +155,10 @@ export default function AddTicketPackage() {
                                     style={{ width: "148px", borderColor: "transparent" }}
                                     placeholder='Giá vé' />} /
 
-                            {formik.values.giaVe.combo ? <Input
+                            {chonGiaCombo ? <Input
+                                onChange={formik.handleChange}
+                                name="comboVe"
+                                type="number"
                                 className='add-ticket-package-price-bottom-input-ticket'
                                 disabled={false}
                                 style={{ width: "78px", border: "1px solid #A5A8B1" }}
@@ -129,17 +175,18 @@ export default function AddTicketPackage() {
                         <p className='add-ticket-package-text'>Tình trạng</p>
                         <Select
                             className='add-ticket-package-price-status-select'
-                            defaultValue="Đang áp dụng"
+                            defaultValue={formik.values.tinhTrang}
                             style={{ width: 176 }}
                             onChange={handleChangeSelect}
+                            suffixIcon={<img src={require("../../../Assets/ButtonIcon/Vector (8).png")} alt="icon" />}
                             options={[
                                 {
                                     value: 'Đang áp dụng',
                                     label: 'Đang áp dụng',
                                 },
                                 {
-                                    value: 'Đã tắt',
-                                    label: 'Đã tắt',
+                                    value: 'Tắt',
+                                    label: 'Tắt',
                                 }
                             ]}
                         />

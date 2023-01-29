@@ -7,6 +7,7 @@ import TicketManagement from './Page/TicketManagement/TicketManagement';
 import TicketControl from './Page/TicketControl/TicketControl';
 import ListTicketPackage from './Page/ListTicketPackage/ListTicketPackage';
 import AddTicketPackage from './Page/ListTicketPackage/AddTicketPackage/AddTicketPackage';
+import UpdateTicketPackage from './Page/ListTicketPackage/UpdateTicketPackage/UpdateTicketPackage';
 
 function App() {
   return (
@@ -18,6 +19,9 @@ function App() {
           <Route path='ticketcontrol' element={<TicketControl />} />
           <Route path='setting' element={<ListTicketPackage />} />
           <Route path='setting/addticketpackage' element={<AddTicketPackage />} />
+          <Route path='setting/updateticketpackage' element={<UpdateTicketPackage />}>
+            <Route path=':id'></Route>
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>
